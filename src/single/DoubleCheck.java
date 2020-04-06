@@ -9,6 +9,7 @@ package single;
 public class DoubleCheck {
 
     private static volatile DoubleCheck instance;
+    private static int i;
     private DoubleCheck() {
     }
 
@@ -25,10 +26,28 @@ public class DoubleCheck {
 
 
 }
-//静态内部类，把新建放在内部类里面。
+//静态内部类，把新建放在内部类里面。最常见的一种写法。又jvm来保证线程安全性，因为类加载到内存中 只会进行一次。
 class Neibu{
     private static class Inmethod{
-
+        private static final Neibu INSTANCE = new Neibu();
     }
+private Neibu(){}
 
+    private Neibu getInstance(){
+        return Inmethod.INSTANCE;
+    }
+}
+enum Effetive{
+        INSTANCE;
+        public void methon1(){
+
+        }
+
+    public static void main(String[] args) {
+        for(int i =1;i<100;i++){
+            new Thread(()->{
+                System.out.println(Effetive.INSTANCE.hashCode());
+            }).start();
+        }
+    }
 }
