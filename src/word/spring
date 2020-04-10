@@ -1,1 +1,0 @@
-在spring中 默认是使用单例模式来创建类的对象的。如果把bean的属性写成prototype
