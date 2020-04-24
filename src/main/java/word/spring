@@ -1,0 +1,12 @@
+在spring中 默认是使用单例模式来创建类的对象的。如果把bean的属性写成prototype则为多列
+
+spring的aop。aspect oriented programming 面向切面编程，pointcut作为切入点，有几个增强的模式，
+例如aroud环绕增强，执行方法前后都要增强，如果用注解的方式，@aspect加在增强类上面，使用aanotationapllicationcontext
+来获取bean，如果bean实现了某个接口，则使用java的动态代理（invokationhandler）来生成代理对象。
+如果只是一个普通的类，则使用cglib 底层用asm开源框架修改字节码来生产一个子类(final类不能被代理的原因)。
+问：为什么jdk的动态代理只能代理接口。因为会默认继承java的proxy类，然后java是单继承多实现的机制。
+
+spring的ioc:
+1.scope属性默认为singleton，可以设置为prototype。设置为原型模式时，运行时再创建对象。单例时加载时把所有单例加载
+到spring的beanfactory中。
+2.采用递归的方式来实例化所有的bean。
